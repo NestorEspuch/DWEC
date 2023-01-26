@@ -1,0 +1,8 @@
+arcgis-map {
+  height: 400px;
+  width: 100%;
+}
+
+.imgSize{
+  width: 250px !important;
+}

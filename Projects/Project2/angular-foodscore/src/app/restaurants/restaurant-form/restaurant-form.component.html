@@ -1,0 +1,173 @@
+<form
+  action="#"
+  class="mt-4"
+  id="newRestaurant"
+  novalidate
+  [formGroup]="formRestaurant"
+  (ngSubmit)="addRestaurant()"
+>
+  <legend *ngIf="editing">Edit a restaurant</legend>
+  <legend *ngIf="!editing">Add a restaurant</legend>
+
+  <div class="mb-3">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="name"
+      formControlName="name"
+      placeholder="Enter name"
+      [ngClass]="validClasses(nameControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="nameControl.errors?.['required']">
+      Name is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="nameControl.errors?.['pattern']">
+      Name can only contain letters and spaces.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="description">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      name="description"
+      formControlName="description"
+      rows="3"
+      placeholder="Description"
+      [ngClass]="validClasses(descriptionControl, 'is-valid', 'is-invalid')"
+    ></textarea>
+    <div
+      class="invalid-feedback"
+      *ngIf="descriptionControl.errors?.['required']"
+    >
+      Description is required.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="cuisine">Cuisine</label>
+    <input
+      type="text"
+      class="form-control"
+      name="cuisine"
+      formControlName="cuisine"
+      id="cuisine"
+      placeholder="Cuisine"
+      [ngClass]="validClasses(cuisineControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="cuisineControl.errors?.['required']">
+      Cuisine is required.
+    </div>
+  </div>
+  <p>Opening days</p>
+  <div
+    class="form-check form-check-inline"
+    *ngFor="let day of days; let i = index"
+    formArrayName="days"
+  >
+    <input
+      type="checkbox"
+      class="custom-control-input"
+      id="checkDay{{ i }}"
+      name="days"
+      [formControlName]="i"
+      [ngClass]="validClasses(daysControl, 'is-valid', 'is-invalid')"
+    />
+    <label class="custom-control-label ms-2" for="checkDay{{ i }}">{{
+      day
+    }}</label>
+  </div>
+  <div class="text-danger" *ngIf="daysControl.errors?.['oneChecked']">
+    A minimum of one day is required.
+  </div>
+  <div class="mb-3">
+    <label for="phone">Phone number</label>
+    <input
+      type="text"
+      class="form-control"
+      id="phone"
+      name="phone"
+      formControlName="phone"
+      pattern="(\+?[0-9]2 ?)?[0-9]{9}"
+      placeholder="Phone number"
+      [ngClass]="validClasses(phoneControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="phoneControl.errors?.['required']">
+      Phone is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="phoneControl.errors?.['pattern']">
+      Phone must have 9 numbers.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="image">Image</label>
+    <input
+      type="file"
+      class="form-control"
+      #fileImage
+      (change)="changeImage(fileImage)"
+      name="image"
+      formControlName="image"
+      [ngClass]="validClasses(imageControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="imageControl.errors?.['required']">
+      Image is required.
+    </div>
+  </div>
+  <img
+    [ngClass]="{ 'd-none': !newRestaurant.image }"
+    class="img-thumbnail mb-3 imgSize"
+    *ngIf="newRestaurant"
+    [src]="newRestaurant.image"
+    alt="newRestaurant"
+  />
+  <img
+    [ngClass]="{ 'd-none': !restaurant.image }"
+    class="img-thumbnail mb-3 imgSize"
+    *ngIf="editing"
+    [src]="restaurant.image"
+  />
+  <div class="mb-3">
+    <label for="address">Address</label>
+    <input
+      type="search"
+      class="form-control"
+      id="address"
+      name="address"
+      readonly
+      [value]="restaurantAdress"
+    />
+    <div class="invalid-feedback">Address is required.</div>
+  </div>
+  <div id="map">
+    <arcgis-map [coords]="[newRestaurant.lng, newRestaurant.lat]">
+      <arcgis-marker
+        [coords]="[newRestaurant.lng, newRestaurant.lat]"
+        color="red"
+      ></arcgis-marker>
+      <arcgis-search
+        position="top-right"
+        (result)="searchResult($event)"
+      ></arcgis-search>
+    </arcgis-map>
+  </div>
+  <div *ngIf="!editing">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="formRestaurant.invalid"
+    >
+      Create
+    </button>
+  </div>
+  <div *ngIf="editing">
+    <button
+      type="submit"
+      class="btn btn-primary"
+      [disabled]="formRestaurant.invalid"
+    >
+      Edit
+    </button>
+    <!--  -->
+  </div>
+</form>

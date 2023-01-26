@@ -1,0 +1,93 @@
+<form
+  action="#"
+  class="mt-4"
+  id="newRestaurant"
+  novalidate
+  (ngSubmit)="addRestaurant()"
+>
+  <div class="mb-3">
+    <label for="name">Name</label>
+    <input
+      type="text"
+      class="form-control"
+      name="title"
+      [(ngModel)]="newRestaurant.name"
+      placeholder="Enter
+name"
+    />
+    <div class="invalid-feedback">
+      Name is required and can only contain letters and spaces.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="description">Description</label>
+    <textarea
+      class="form-control"
+      id="description"
+      name="description"
+      rows="3"
+      placeholder="Description"
+      [(ngModel)]="newRestaurant.description"
+    ></textarea>
+    <div class="invalid-feedback">Description is required.</div>
+  </div>
+  <div class="mb-3">
+    <label for="cuisine">Cuisine</label>
+    <input
+      type="text"
+      class="form-control"
+      name="cuisine"
+      id="cuisine"
+      placeholder="Cuisine"
+      [(ngModel)]="newRestaurant.cuisine"
+    />
+    <div class="invalid-feedback">Cuisine is required.</div>
+  </div>
+  <p>Opening days</p>
+  <div
+    class="form-check form-check-inline"
+    *ngFor="let day of days; let i = index"
+  >
+    <input
+      type="checkbox"
+      class="custom-control-input"
+      id="checkDay{{ i }}"
+      name="days"
+      [(ngModel)]="daysOpen[i]"
+    />
+    <label class="custom-control-label ms-2" for="checkDay{{ i }}">{{
+      day
+    }}</label>
+  </div>
+  <div class="mb-3">
+    <label for="phone">Phone number</label>
+    <input
+      type="text"
+      class="form-control"
+      id="phone"
+      name="phone"
+      pattern="(\+?[0-9]2 ?)?[0-9]{9}"
+      placeholder="Phone number"
+      [(ngModel)]="newRestaurant.phone"
+    />
+    <div class="invalid-feedback">Phone must have 9 numbers.</div>
+  </div>
+  <div class="mb-3">
+    <label for="image">Image</label>
+    <input
+      type="file"
+      class="form-control"
+      #fileImage
+      (change)="changeImage(fileImage)"
+      name="image"
+    />
+  </div>
+  <img
+    [src]="newRestaurant.image"
+    [ngClass]="{ 'd-none': !newRestaurant.image }"
+    class="img-thumbnail mb-3"
+  />
+  <div>
+    <button type="submit" class="btn btn-primary">Create</button>
+  </div>
+</form>

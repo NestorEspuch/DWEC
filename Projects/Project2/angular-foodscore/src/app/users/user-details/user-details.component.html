@@ -1,0 +1,24 @@
+<div id="profile" *ngIf="user">
+  <div class="row mt-4">
+    <div class="col-3">
+      <img
+        class="w-100"
+        id="avatar"
+        src="{{ user.avatar }}"
+        alt="{{ user.name }}"
+      />
+    </div>
+    <div class="col-9">
+      <h4>{{ user.name }}</h4>
+      <h4>
+        <small class="text-muted">{{ user.email }}</small>
+      </h4>
+      <p>
+        <a [routerLink]="['/users/edit', user.id]" *ngIf="user.me" class="btn btn-primary"
+          >Edit profile</a
+        >
+        <a class="btn btn-warning" style="margin-left: 10px !important;" [routerLink]="['/restaurant']" [queryParams]="{ creator: user.id }">Restaurants created</a>
+      </p>
+    </div>
+  </div>
+</div>

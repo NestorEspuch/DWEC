@@ -1,0 +1,142 @@
+<form
+  action="#"
+  class="mt-4"
+  id="form-register"
+  novalidate
+  [formGroup]="formUser"
+  (ngSubmit)="addUser()"
+>
+  <legend>Create an account</legend>
+
+  <div class="mb-3">
+    <label for="nombre">Name:</label>
+    <input
+      type="text"
+      class="form-control"
+      id="name"
+      name="nameUser"
+      formControlName="name"
+      placeholder="Name"
+      [ngClass]="validClasses(nameControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="nameControl.errors?.['required']">
+      Name is required.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="correo">Email:</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      formControlName="email"
+      placeholder="Email"
+      [ngClass]="validClasses(emailControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+      Email is required.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="correo">Repeat Email:</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email2"
+      name="email2"
+      formControlName="email2"
+      placeholder="Email"
+      [ngClass]="validClasses(email2Control, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="email2Control.errors?.['required']">
+      Email2 is required.
+    </div>
+    <div class="invalid-feedback" *ngIf="email2Control.errors?.['sameEmail']">
+      Emails must be the same.
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      formControlName="password"
+      placeholder="Password"
+      [ngClass]="validClasses(passwordControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="passwordControl.errors?.['required']">
+      Password is required.
+    </div>
+  </div>
+  <div class="form-row">
+    <div class="mb-3 col">
+      <label for="lat">Latitude:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lat"
+        name="lat"
+        placeholder="Geolocating..."
+        readonly
+        [value]="newUser.lat"
+      />
+    </div>
+    <div class="mb-3 col">
+      <label for="lng">Longitude:</label>
+      <input
+        type="text"
+        class="form-control"
+        id="lng"
+        name="lng"
+        placeholder="Geolocating..."
+        readonly
+        [value]="newUser.lng"
+      />
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="image">Avatar image</label>
+    <input
+      type="file"
+      class="form-control"
+      #fileImage
+      (change)="changeImage(fileImage)"
+      id="avatar"
+      name="avatar"
+      formControlName="avatar"
+      [ngClass]="validClasses(avatarControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="avatarControl.errors?.['required']">
+      Avatar is required.
+    </div>
+  </div>
+  <img
+    alt=""
+    id="imgPreview"
+    class="img-thumbnail imgSize"
+    [ngClass]="{ 'd-none': !newUser.avatar }"
+    *ngIf="newUser"
+    [src]="newUser.avatar"
+  />
+  <p class="text-danger" id="errorInfo"></p>
+  <a class="btn btn-secondary" href="/login" role="button">Go back</a>
+  <button type="submit" class="btn btn-primary" [disabled]="formUser.invalid">
+    Create account
+  </button>
+
+  <div class="mt-3">
+    <arcgis-map [coords]="[newUser.lng, newUser.lat]">
+      <arcgis-marker
+        [coords]="[newUser.lng, newUser.lat]"
+        color="red"
+      ></arcgis-marker>
+      <arcgis-search
+        position="top-right"
+        (result)="searchResult($event)"
+      ></arcgis-search>
+    </arcgis-map>
+  </div>
+</form>

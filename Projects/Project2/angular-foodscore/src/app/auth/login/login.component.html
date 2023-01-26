@@ -1,0 +1,65 @@
+<form
+  action="#"
+  id="form-login"
+  class="mt-4"
+  novalidate
+  [formGroup]="formAuth"
+  (ngSubmit)="loginUser()"
+>
+  <legend>Welcome to FoodScore!</legend>
+
+  <div class="mb-3">
+    <label for="correo">Email:</label>
+    <input
+      type="email"
+      class="form-control"
+      id="email"
+      name="email"
+      formControlName="email"
+      placeholder="Email"
+      [ngClass]="validClasses(emailControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+      Email is required
+    </div>
+  </div>
+  <div class="mb-3">
+    <label for="password">Password:</label>
+    <input
+      type="password"
+      class="form-control"
+      id="password"
+      name="password"
+      formControlName="password"
+      placeholder="Password"
+      [ngClass]="validClasses(passwordControl, 'is-valid', 'is-invalid')"
+    />
+    <div class="invalid-feedback" *ngIf="emailControl.errors?.['required']">
+      Password is required
+    </div>
+  </div>
+  <p class="text-danger" id="errorInfo"></p>
+  <a class="btn btn-secondary" href="auth/register" role="button"
+    >Create account</a
+  >
+
+  <button
+    type="submit"
+    class="btn btn-primary"
+    [routerLink]="['/restaurant']"
+    [disabled]="formAuth.invalid"
+  >
+    Login
+  </button>
+<hr>
+  <button appGoogleLogin type="button" class="btn btn-danger" (loginOk)="loggedGoogle($event)">
+    <fa-icon [icon]="googleIcon"></fa-icon>
+    Login with Google
+  </button>
+
+  <button appFbLogin type="button" class="btn btn-primary" (loginOk)="loggedFacebook($event)"
+    [scopes]="['email', 'public_profile']">
+    <fa-icon [icon]="fbIcon"></fa-icon>
+    Login with Facebook
+  </button>
+</form>

@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="exercise-events.js" defer></script>
+    <style>
+        #container {
+            display: flex;
+            flex-direction: row;
+            gap: 10px;
+        }
+
+        #container > div {
+            height: 80px;
+            width: 150px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            border: 1px solid #ccc;
+        }
+
+        .selected {
+            background-color: lightcyan;
+        }
+    </style>
+</head>
+<body>
+    <p>
+        When the mouse is inside a div, it will have a light blue background (selected class). <br>
+        When the mouse is out, remove that class.<br>
+        If the user presses control + click, it will copy the text of the div inside the #result element
+    </p>
+    <div id="container">
+        <div>Tomato</div>
+        <div>Potato</div>
+        <div>Carrot</div>
+    </div>
+    <p>You selected: <span id="result"></span></p>
+</body>
+</html>

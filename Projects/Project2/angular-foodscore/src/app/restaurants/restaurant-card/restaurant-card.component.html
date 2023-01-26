@@ -1,0 +1,35 @@
+<div class="card h-100 shadow">
+  <img class="card-img-top" [routerLink]="['/restaurant',restaurant.id]" src="{{ restaurant.image }}" />
+  <div class="card-body">
+    <button class="btn btn-danger btn-sm float-end" *ngIf="restaurant.mine" (click)="deleteRestaurant()">Delete</button>
+    <h4 class="card-title" [routerLink]="['/restaurant',restaurant.id]">{{ restaurant.name }}</h4>
+    <p class="card-text">{{ restaurant.description }}</p>
+    <div class="card-text">
+      <small class="text-muted">
+        <strong>Opens: </strong>{{ fillDays(restaurant.daysOpen) }}
+      </small>
+      <span
+        class="badge ms-2 bg-success"
+        *ngIf="checkOpening(restaurant.daysOpen); else closed"
+        >Open</span
+      >
+      <ng-template #closed
+        ><span class="badge ms-2 bg-danger">Closed</span></ng-template
+      >
+    </div>
+    <div class="card-text">
+      <small class="text-muted">
+        <strong>Phone: </strong>{{ restaurant.phone }}
+      </small>
+    </div>
+    <div class="card-text">
+      <small class="text-muted">
+        <fs-star-rating [rating]="restaurant.stars!"[edit]="false"></fs-star-rating>
+        ({{restaurant.stars}})
+      </small>
+    </div>
+  </div>
+  <div class="card-footer">
+    <small class="text-muted">{{ restaurant.cuisine }}</small>
+  </div>
+</div>

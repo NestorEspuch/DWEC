@@ -1,0 +1,42 @@
+<!-- Pipe -->
+<nav class="navbar navbar-light bg-light justify-content-between mt-3 row">
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        style="cursor: pointer"
+        [ngClass]="{ 'active': active }"
+        (click)="setActive()"
+        >Show open</a
+      >
+    </li>
+  </ul>
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="toSearch"
+    />
+  </form>
+</nav>
+<!-- /Pipe -->
+
+<!-- Restaurants -->
+<div
+  id="placesContainer"
+  class="mb-4 mt-4 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+>
+  <div
+    class="col"
+    *ngFor="let restaurant of restaurants | restaurantFilter: !active:toSearch"
+  >
+    <fs-restaurant-card
+      [restaurant]="restaurant"
+      (deleted)="deleteRestaurant(restaurant)"
+    ></fs-restaurant-card>
+  </div>
+</div>
+<!-- /Restaurants -->
