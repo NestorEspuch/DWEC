@@ -1,0 +1,83 @@
+{
+  "project_info": {
+    "project_number": "710692714196",
+    "firebase_url": "https://dwec-2017-1507729559860.firebaseio.com",
+    "project_id": "dwec-2017-1507729559860",
+    "storage_bucket": "dwec-2017-1507729559860.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710692714196:android:3210b105a91874beef6d41",
+        "android_client_info": {
+          "package_name": "com.arturober.ionic.products"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710692714196-pnvdi1v1g4l26o2ddv302qg4hkmebq69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACtDPEF6ezipTH_iF2Oq4RdkOSxCD9Kco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710692714196-pnvdi1v1g4l26o2ddv302qg4hkmebq69.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "710692714196-1tljprr7l5ucblqsmoglaf5hop3bb1mt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arturober.ionicproducts"
+              }
+            }
+          ]
+        }
+      }
+    },
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:710692714196:android:43a1d063f95840a8",
+        "android_client_info": {
+          "package_name": "com.arturober.ionicproducts"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "710692714196-pnvdi1v1g4l26o2ddv302qg4hkmebq69.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyACtDPEF6ezipTH_iF2Oq4RdkOSxCD9Kco"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "710692714196-pnvdi1v1g4l26o2ddv302qg4hkmebq69.apps.googleusercontent.com",
+              "client_type": 3
+            },
+            {
+              "client_id": "710692714196-1tljprr7l5ucblqsmoglaf5hop3bb1mt.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.arturober.ionicproducts"
+              }
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
