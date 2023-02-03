@@ -15,6 +15,7 @@ import { authTokenInterceptor } from './app/interceptors/auth-token.interceptor'
 import { baseUrlInterceptor } from './app/interceptors/base-url.interceptor';
 
 import { APP_ROUTES } from './app/routes';
+import { provideArcgisToken } from './app/maps/arcgis-maps.config';
 
 if (environment.production) {
   enableProdMode();
@@ -23,7 +24,10 @@ if (environment.production) {
 bootstrapApplication(AppComponent, {
   providers: [
     provideHttpClient(
-      withInterceptors([baseUrlInterceptor, authTokenInterceptor])
+      withInterceptors([baseUrlInterceptor, authTokenInterceptor]),
+    ),
+    provideArcgisToken(
+      'AAPK995b0f2b076a44a7a7521baf6e1a131dKUWODcTBOrS4PyKo5gzw5fW4oejNtboOOAGWqdkTcOoRkwmtoJaivtCeUQ1PSA-g'
     ),
     provideRouter(APP_ROUTES, withPreloading(PreloadAllModules)),
     importProvidersFrom(IonicModule.forRoot()),

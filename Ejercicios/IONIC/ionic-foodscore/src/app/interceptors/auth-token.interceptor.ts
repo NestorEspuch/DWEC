@@ -6,7 +6,6 @@ import { switchMap } from 'rxjs/operators';
 export const authTokenInterceptor: HttpInterceptorFn = (req, next) => {
   return from(Preferences.get({ key: 'fs-token' })).pipe(
     switchMap((token) => {
-      console.log(token);
       if (!token.value) {
         return next(req);
       }

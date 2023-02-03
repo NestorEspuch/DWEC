@@ -13,21 +13,21 @@ import { AuthService } from './auth/services/auth.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [CommonModule, IonicModule, RouterLink,RouterLinkActive],
+  imports: [CommonModule, IonicModule, RouterLink, RouterLinkActive,],
   templateUrl: 'app.component.html',
   styleUrls: ['app.component.scss'],
 })
 export class AppComponent {
   menuDisabled = true;
 
-  public appPages = [
-    { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
-    { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
-    { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
-    { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
-    { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
-    { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
-  ];
+  // public appPages = [
+  //   { title: 'Inbox', url: '/folder/Inbox', icon: 'mail' },
+  //   { title: 'Outbox', url: '/folder/Outbox', icon: 'paper-plane' },
+  //   { title: 'Favorites', url: '/folder/Favorites', icon: 'heart' },
+  //   { title: 'Archived', url: '/folder/Archived', icon: 'archive' },
+  //   { title: 'Trash', url: '/folder/Trash', icon: 'trash' },
+  //   { title: 'Spam', url: '/folder/Spam', icon: 'warning' },
+  // ];
 
   constructor(
     public environmentInjector: EnvironmentInjector,
@@ -36,12 +36,10 @@ export class AppComponent {
     private platform: Platform,
     private toast: ToastController
   ) {
-    //TODO: this.initializeApp();
     this.authService.loginChange$.subscribe(
       (logged) => (this.menuDisabled = !logged)
     );
   }
-  //TODO: METODOS PUSH ACTUALMENTE NO LOS NECESITO
   // initializeApp() {
   //   if (this.platform.is('capacitor')) {
   //     this.platform.ready().then(() => {

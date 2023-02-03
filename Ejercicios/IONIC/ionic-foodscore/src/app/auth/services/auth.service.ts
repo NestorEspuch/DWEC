@@ -1,9 +1,10 @@
 import { Injectable } from '@angular/core';
-import { Observable, of, from, ReplaySubject } from 'rxjs';
+import { Observable, of, from, ReplaySubject, throwError } from 'rxjs';
 import { switchMap, catchError, map } from 'rxjs/operators';
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
 import { User } from '../interfaces/user.interface';
+import { UserResponse } from '../interfaces/responses';
 
 @Injectable({
   providedIn: 'root',
@@ -31,10 +32,34 @@ export class AuthService {
             await Preferences.set({ key: 'fs-token', value: r.accessToken });
             this.setLogged(true);
           } catch (e) {
-            throw new Error('Can\'t save authentication token in storage!');
+            throw new Error("Can't save authentication token in storage!");
           }
         })
       );
+  }
+
+  getUser(id: number, me?: boolean) {
+    if (me) {
+      return this.http.get<UserResponse>(`auth/me`).pipe(
+        map((r) => r.user),
+        catchError((resp: HttpErrorResponse) =>
+          throwError(
+            () =>
+              `Error getting your user. Status: ${resp.status}. Message: ${resp.message}`
+          )
+        )
+      );
+    } else {
+      return this.http.get<UserResponse>(`auth/${id}`).pipe(
+        map((r) => r.user),
+        catchError((resp: HttpErrorResponse) =>
+          throwError(
+            () =>
+              `Error getting user. Status: ${resp.status}. Message: ${resp.message}`
+          )
+        )
+      );
+    }
   }
 
   register(user: User): Observable<void> {

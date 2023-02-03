@@ -7,12 +7,12 @@ export const APP_ROUTES: Routes = [
     loadChildren: () => import('./auth/routes').then((m) => m.AUTH_ROUTES),
     canActivate: [logoutActivateGuard],
   },
-  // {
-  //   path: 'restaurants',
-  //   loadChildren: () =>
-  //     import('./restaurants/routes').then((m) => m.PRODUCTS_ROUTES),
-  //   canActivate: [loginActivateGuard],
-  // },
+  {
+    path: 'restaurants',
+    loadChildren: () =>
+      import('./restaurants/routes').then((m) => m.RESTAURANT_ROUTES),
+    canActivate: [loginActivateGuard],
+  },
   {
     path: '',
     pathMatch: 'full',

@@ -50,7 +50,7 @@ export class LoginComponent implements OnInit {
     this.authService
       .login(this.email, this.password, this.firebaseToken)
       .subscribe({
-        next: () => this.navCtrl.navigateRoot(['/products']),
+        next: () => this.navCtrl.navigateRoot(['/restaurants']),
         error: async (error) => {
           (
             await this.alertCtrl.create({

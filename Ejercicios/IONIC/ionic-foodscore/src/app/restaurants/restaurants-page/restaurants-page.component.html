@@ -1,0 +1,66 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Restaurants</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <ion-refresher #refresher slot="fixed" (ionRefresh)="reloadRestaurants(refresher)">
+    <ion-refresher-content>
+    </ion-refresher-content>
+  </ion-refresher>
+  <ion-fab vertical="bottom" horizontal="end" slot="fixed">
+    <ion-fab-button color="secondary" [routerLink]="['/restaurants/add']" [routerDirection]="'root'">
+      <ion-icon name="add"></ion-icon>
+    </ion-fab-button>
+  </ion-fab>
+  <ion-list id="restaurant-list" style="padding-bottom: 50px">
+    <ion-item *ngFor="let restaurant of restaurants">
+      <fs-restaurant-card [restaurant]="restaurant"></fs-restaurant-card>
+    </ion-item>
+  </ion-list>
+</ion-content>
+
+<!-- <h2 *ngIf="userRestaurants && user" class="mt-5">Restaurants from {{user.name}}</h2>
+<nav class="navbar navbar-light bg-light justify-content-between mt-3 row">
+  <ul class="nav nav-pills col-auto ms-3">
+    <li class="nav-item">
+      <a
+        class="nav-link active"
+        style="cursor: pointer"
+        [ngClass]="{ 'active': active }"
+        (click)="setActive()"
+        >Show open</a
+      >
+    </li>
+  </ul>
+  <form class="container-fluid col">
+    <input
+      class="form-control"
+      type="text"
+      name="search"
+      placeholder="Search"
+      aria-label="Search"
+      [(ngModel)]="toSearch"
+    />
+  </form>
+</nav>
+
+<div
+  id="placesContainer"
+  class="mb-4 mt-4 row row-cols-1 row-cols-md-2 row-cols-xl-3 g-4"
+>
+  <div
+    class="col"
+    //*ngFor="let restaurant of restaurants | restaurantFilter: !active:toSearch"
+  >
+    <fs-restaurant-card
+      [restaurant]="restaurant"
+      (deleted)="deleteRestaurant(restaurant)"
+    ></fs-restaurant-card>
+  </div>
+</div> -->
+<!-- /Restaurants -->

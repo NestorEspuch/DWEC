@@ -1,0 +1,162 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Add product</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+  <form #restaurantForm="ngForm" (ngSubmit)="addRestaurant()">
+    <ion-list>
+      <ion-item>
+        <ion-label position="floating">Name</ion-label>
+        <ion-input
+          name="name"
+          required
+          [(ngModel)]="newRestaurant.name"
+          #nameModel="ngModel"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="nameModel.dirty && nameModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Description</ion-label>
+        <ion-input
+          name="description"
+          required
+          [(ngModel)]="newRestaurant.description"
+          #descModel="ngModel"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="descModel.dirty && descModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Cuisine</ion-label>
+        <ion-input
+          name="cuisine"
+          required
+          [(ngModel)]="newRestaurant.cuisine"
+          #cuisineModel="ngModel"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="cuisineModel.dirty && cuisineModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <!-- <ion-label> Opening days </ion-label>
+      <ion-item *ngFor="let day of days; let i = index">
+        <ion-checkbox name="checkDay{{i}}"></ion-checkbox>
+        <ion-label position="floating">{{day}}</ion-label>
+      </ion-item> -->
+      <ion-item>
+        <ion-label position="floating">Phone</ion-label>
+        <ion-input
+          type="Telephone input"
+          name="phone"
+          required
+          [(ngModel)]="newRestaurant.phone"
+          #phoneModel="ngModel"
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="phoneModel.dirty && phoneModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="floating">Address</ion-label>
+        <ion-input
+          type="text"
+          name="address"
+          required
+          [(ngModel)]="newRestaurant.address"
+          #addressModel="ngModel"
+          readonly
+        ></ion-input>
+        <ion-icon
+          name="checkmark-circle"
+          slot="end"
+          color="success"
+          *ngIf="addressModel.dirty && addressModel.valid"
+        ></ion-icon>
+      </ion-item>
+      <ion-item>
+        <ion-label position="inset">Image</ion-label>
+        <ion-button color="secondary" (click)="takePhoto()">
+          <ion-icon name="camera" slot="start"></ion-icon>
+          Camera
+        </ion-button>
+        <ion-button color="tertiary" (click)="pickFromGallery()">
+          <ion-icon name="images" slot="start"></ion-icon>
+          Gallery
+        </ion-button>
+      </ion-item>
+    </ion-list>
+    <ion-content>
+      <arcgis-map [coords]="[newRestaurant.lng, newRestaurant.lat]">
+        <arcgis-marker
+          [coords]="[newRestaurant.lng, newRestaurant.lat]"
+          color="red"
+        ></arcgis-marker>
+        <arcgis-search
+          position="top-right"
+          (result)="searchResult($event)"
+        ></arcgis-search>
+      </arcgis-map>
+    </ion-content>
+    <ion-img [src]="newRestaurant.image" *ngIf="newRestaurant.image"></ion-img>
+    <ion-grid>
+      <ion-row>
+        <ion-col>
+          <ion-button
+            type="submit"
+            color="primary"
+            expand="block"
+            [disabled]="restaurantForm.invalid || !newRestaurant.image"
+          >
+            <ion-icon name="paper" slot="add-circle"></ion-icon>
+            Add restaurant
+          </ion-button>
+        </ion-col>
+        <ion-col>
+          <ion-button
+            color="danger"
+            expand="block"
+            fill="outline"
+            [routerLink]="['/restaurants']"
+            [routerDirection]="'root'"
+          >
+            <ion-icon name="arrow-undo-circle" slot="start"></ion-icon>
+            Cancel
+          </ion-button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+  </form>
+</ion-content>
+
+<!-- <div id="map">
+    <arcgis-map [coords]="[newRestaurant.lng, newRestaurant.lat]">
+      <arcgis-marker
+        [coords]="[newRestaurant.lng, newRestaurant.lat]"
+        color="red"
+      ></arcgis-marker>
+      <arcgis-search
+        position="top-right"
+        (result)="searchResult($event)"
+      ></arcgis-search>
+    </arcgis-map>
+  </div> -->
