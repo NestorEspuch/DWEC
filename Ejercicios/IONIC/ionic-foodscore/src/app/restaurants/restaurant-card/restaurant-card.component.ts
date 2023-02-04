@@ -20,7 +20,7 @@ import { AlertController, IonicModule } from '@ionic/angular';
     IonicModule,
   ],
 })
-export class RestaurantCardComponent implements OnInit{
+export class RestaurantCardComponent implements OnInit {
   constructor(
     private readonly restaurantsService: RestaurantsService,
     private readonly router: Router,
@@ -39,12 +39,14 @@ export class RestaurantCardComponent implements OnInit{
   }
 
   checkOpening(daysOpen: string[]): boolean {
-    if (daysOpen.includes(this.days[new Date().getDay()])) {
-        return true;
-    } else {
-        return false;
-    }
-}
+    let result = false;
+    daysOpen.forEach((day) => {
+      if (+day == new Date().getDay()) {
+        result = true;
+      }
+    });
+    return result;
+  }
 
   fillDays(daysOpen: string[]): string {
     let result = '';
