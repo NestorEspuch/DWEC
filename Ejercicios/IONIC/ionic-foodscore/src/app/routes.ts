@@ -14,6 +14,12 @@ export const APP_ROUTES: Routes = [
     canActivate: [loginActivateGuard],
   },
   {
+    path: 'users',
+    loadChildren: () =>
+      import('./users/routes').then((m) => m.USER_ROUTES),
+    canActivate: [loginActivateGuard],
+  },
+  {
     path: '',
     pathMatch: 'full',
     redirectTo: '/auth/login',

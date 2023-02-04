@@ -2,7 +2,6 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
-import { PushNotifications, Token } from '@capacitor/push-notifications';
 import {
   AlertController,
   IonicModule,
@@ -31,19 +30,19 @@ export class LoginComponent implements OnInit {
   ) {}
 
   ngOnInit() {
-    if (this.platform.is('capacitor')) {
-      PushNotifications.register();
+    // if (this.platform.is('capacitor')) {
+    //   PushNotifications.register();
 
-      // On success, we should be able to receive notifications
-      PushNotifications.addListener('registration', (token: Token) => {
-        this.firebaseToken = token.value;
-        console.log(token);
-      });
+    //   // On success, we should be able to receive notifications
+    //   PushNotifications.addListener('registration', (token: Token) => {
+    //     this.firebaseToken = token.value;
+    //     console.log(token);
+    //   });
 
-      PushNotifications.addListener('registrationError', (error) => {
-        console.log(error);
-      });
-    }
+    //   PushNotifications.addListener('registrationError', (error) => {
+    //     console.log(error);
+    //   });
+    // }
   }
 
   login() {

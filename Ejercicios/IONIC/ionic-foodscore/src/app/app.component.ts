@@ -1,11 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, EnvironmentInjector } from '@angular/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
-import {
-  ActionPerformed,
-  PushNotifications,
-  PushNotificationSchema,
-} from '@capacitor/push-notifications';
 import { SplashScreen } from '@capacitor/splash-screen';
 import { StatusBar, Style } from '@capacitor/status-bar';
 import { IonicModule, NavController, Platform, ToastController } from '@ionic/angular';

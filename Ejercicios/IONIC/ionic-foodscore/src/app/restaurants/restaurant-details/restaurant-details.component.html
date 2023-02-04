@@ -1,18 +1,43 @@
-<div class="mt-4">
-  <!-- Restaurant card -->
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-buttons slot="start">
+      <ion-menu-button></ion-menu-button>
+    </ion-buttons>
+    <ion-title>Restaurant details</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<!-- Restaurant card -->
+<ion-content>
   <fs-restaurant-card [restaurant]="restaurant"></fs-restaurant-card>
-  <div class="card mt-4" *ngIf="restaurant.mine">
-    <button
-      class="btn btn-primary btn-sm float-end"
+  <ion-item *ngIf="restaurant.mine">
+    <ion-button
+      color="primary"
       [routerLink]="['/restaurant', restaurant.id, 'edit']"
     >
       Edit
-    </button>
-  </div>
-</div>
+    </ion-button>
+  </ion-item>
+</ion-content>
 
+<ion-tabs [environmentInjector]="environmentInjector">
+  <ion-tab-bar slot="bottom">
+    <ion-tab-button tab="info">
+      <ion-icon name="information-circle"></ion-icon>
+      <ion-label>Info</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="comments">
+      <ion-icon name="chatbox-ellipses"></ion-icon>
+      <ion-label>Comments</ion-label>
+    </ion-tab-button>
+    <ion-tab-button tab="location">
+      <ion-icon name="location"></ion-icon>
+      <ion-label>Location</ion-label>
+    </ion-tab-button>
+  </ion-tab-bar>
+</ion-tabs>
 <!-- Restaurant map -->
-<div class="card mt-4">
+<!-- <div class="card mt-4">
   <div class="card-header bg-success text-white" id="address">
     {{ restaurant.address }}
   </div>
@@ -50,10 +75,10 @@
       </div>
     </div>
   </div>
-</div>
+</div> -->
 
 <!-- Restaurant comments -->
-<ul class="list-group mt-4 mb-4" id="comments">
+<!-- <ul class="list-group mt-4 mb-4" id="comments">
   <li class="list-group-item active">Restaurant comments</li>
   <li *ngFor="let comment of comments" class="list-group-item d-flex flex-row">
     <div>
@@ -120,4 +145,4 @@
 <div class="mt-4 mb-4">
   <hr />
   <button class="btn btn-success" (click)="goBack()">Go back</button>
-</div>
+</div> -->
