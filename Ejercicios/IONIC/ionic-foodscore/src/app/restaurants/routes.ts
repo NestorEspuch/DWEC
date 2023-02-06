@@ -34,5 +34,7 @@ export const RESTAURANT_ROUTES: Routes = [
         (m) => m.RestaurantDetailsComponent
       ),
     resolve: { restaurant: restaurantResolver },
+    loadChildren: () =>
+      import('./restaurant-details/routes').then((m) => m.RESTAURANT_DETAIL_ROUTES),
   },
 ];

@@ -35,7 +35,7 @@ export class RestaurantCardComponent implements OnInit {
   @Output() deleted = new EventEmitter<void>();
 
   ngOnInit(): void {
-    this.restaurant.distance = Math.round(this.restaurant.distance!);
+
   }
 
   checkOpening(daysOpen: string[]): boolean {

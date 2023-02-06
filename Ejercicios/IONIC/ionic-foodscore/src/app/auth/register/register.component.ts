@@ -6,6 +6,7 @@ import { Camera, CameraSource, CameraResultType } from '@capacitor/camera';
 import { IonicModule, NavController, ToastController } from '@ionic/angular';
 import { MatchValidator } from 'src/app/validators/match.validator';
 import { User } from '../interfaces/user.interface';
+
 import { AuthService } from '../services/auth.service';
 
 @Component({
@@ -20,7 +21,9 @@ export class RegisterComponent implements OnInit {
     name: '',
     password: '',
     email: '',
-    avatar: ''
+    avatar: '',
+    lat: 0,
+    lng: 0,
   };
   password2 = '';
 

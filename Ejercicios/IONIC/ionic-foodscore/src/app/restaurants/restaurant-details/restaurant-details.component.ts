@@ -9,6 +9,7 @@ import { ArcgisMarkerDirective } from '../../maps/arcgis-marker/arcgis-marker.di
 import { ArcgisMapComponent } from '../../maps/arcgis-map/arcgis-map.component';
 import { IonicModule, IonRefresher } from '@ionic/angular';
 import { RestaurantsService } from '../services/restaurant-service.service';
+import { Observable, shareReplay } from 'rxjs';
 
 @Component({
   selector: 'fs-restaurant-details',
@@ -32,9 +33,18 @@ export class RestaurantDetailsComponent implements OnInit {
     private readonly route: ActivatedRoute,
     public environmentInjector: EnvironmentInjector,
     private readonly restaurantService: RestaurantsService,
-  ) {}
+  ) {
+    this.restaurant$ = this.restaurantService
+    .getRestaurant(this.route.snapshot.params['id'])
+    .pipe(shareReplay(1));
+  }
 
   restaurant!: Restaurant;
+  restaurant$: Observable<Restaurant>;
+
+  getRestaurant(): Observable<Restaurant> {
+    return this.restaurant$;
+  }
 
   goBack() {
     this.router.navigate(['/restaurant']);
@@ -44,5 +54,6 @@ export class RestaurantDetailsComponent implements OnInit {
     this.route.data.subscribe((restaurant) => {
       this.restaurant = restaurant['restaurant'];
     });
+    this.restaurant$.subscribe((restaurant) => (this.restaurant = restaurant));
   }
 }

@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../interfaces/user';
+
 import { ActivatedRoute } from '@angular/router';
 import { UsersService } from '../services/user-service.service';
 import {
@@ -11,6 +11,7 @@ import {
   Validators,
 } from '@angular/forms';
 import { sameEmail } from 'src/app/validators/sameEmail.validator';
+import { User } from 'src/app/auth/interfaces/user.interface';
 
 
 @Component({

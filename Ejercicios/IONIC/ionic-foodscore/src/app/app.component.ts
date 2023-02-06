@@ -62,7 +62,7 @@ export class AppComponent {
   //       (notification: ActionPerformed) => {
   //         if (notification.notification.data.prodId) {
   //           this.nav.navigateRoot([
-  //             '/products',
+  //             '/restaurants',
   //             notification.notification.data.prodId,
   //             'comments',
   //           ]);

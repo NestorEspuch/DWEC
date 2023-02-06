@@ -1,7 +1,7 @@
 import { inject } from "@angular/core";
 import { ResolveFn, Router } from "@angular/router";
 import { catchError, EMPTY } from "rxjs";
-import { User } from "../interfaces/user";
+import { User } from "src/app/auth/interfaces/user.interface";
 import { UsersService } from "../services/user-service.service";
 
 export const userResolver: ResolveFn<User> = (route) => {

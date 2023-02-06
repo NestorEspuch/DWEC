@@ -1,4 +1,4 @@
-<ion-card>
+<ion-card *ngIf="restaurant">
   <img
     alt="{{ restaurant.name }}"
     src="{{ restaurant.image }}"
@@ -48,7 +48,7 @@
         <ion-item lines="none">
           <ion-label
             ><strong>Cuisine:</strong> {{ restaurant.cuisine }}</ion-label
-          >{{ restaurant.distance }}Km
+          >{{ restaurant.distance | number:'1.2-2' }}Km
         </ion-item>
       </ion-item-group>
     </ion-list>

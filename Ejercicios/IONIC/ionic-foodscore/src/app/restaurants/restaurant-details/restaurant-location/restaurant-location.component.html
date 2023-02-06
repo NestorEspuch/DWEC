@@ -1,0 +1,16 @@
+<ion-card *ngIf="restaurant">
+  <ion-card-header color="success" class="ion-margin-top">
+    <ion-card-title>{{restaurant.address}}</ion-card-title>
+  </ion-card-header>
+</ion-card>
+<ion-content *ngIf="restaurant">
+  <arcgis-map
+    [coords]="[restaurant.lng, restaurant.lat]"
+    style="height: 100%; width: 100%"
+  >
+    <arcgis-marker
+      [coords]="[restaurant.lng, restaurant.lat]"
+      color="red"
+    ></arcgis-marker>
+  </arcgis-map>
+</ion-content>

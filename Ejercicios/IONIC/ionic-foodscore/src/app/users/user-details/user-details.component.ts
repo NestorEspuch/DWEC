@@ -1,12 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 import { CommonModule } from '@angular/common';
-import { User } from '../interfaces/user';
 import { ActivatedRoute, RouterModule } from '@angular/router';
 import { Restaurant } from 'src/app/restaurants/interfaces/restaurant';
 import { RestaurantCardComponent } from '../../restaurants/restaurant-card/restaurant-card.component';
 import { RestaurantsService } from 'src/app/restaurants/services/restaurant-service.service';
 import { UsersService } from '../services/user-service.service';
 import { IonicModule } from '@ionic/angular';
+import { User } from 'src/app/auth/interfaces/user.interface';
 
 @Component({
   selector: 'fs-user-details',

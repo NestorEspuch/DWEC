@@ -130,14 +130,6 @@ export class RestaurantFormComponent implements OnInit {
     };
   }
 
-  // searchResult(result: SearchResult) {
-  //   this.newRestaurant.lat = result.latitude;
-  //   this.newRestaurant.lng = result.longitude;
-
-  //   this.restaurantAddress = result.address;
-  //   this.restaurant.address = this.restaurantAddress;
-  // }
-
   changeToBolean(daysOpen: string[]): boolean[] {
     const result = new Array(7).fill(false);
     daysOpen.forEach((d) => {

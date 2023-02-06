@@ -46,17 +46,48 @@ export class RestaurantsPageComponent {
   toSearch = '';
   active = true;
 
+  ngOnInit(): void {
+    this.route.queryParams.subscribe((params) => {
+      if (params['creator']) {
+        this.userService
+          .getUser(+params['creator'])
+          .subscribe((u) => (this.user = u));
+        this.restaurantsService.getRestaurants().subscribe(
+          (restaurant) =>
+            (this.restaurants = restaurant.filter((r) => {
+              if (r.mine) {
+                return r.creator?.id == params['creator'];
+              } else {
+                return r.creator == params['creator'];
+              }
+            }))
+        );
+        this.userRestaurants = true;
+      } else {
+        this.restaurantsService
+          .getRestaurants()
+          .subscribe((restaurant) => (this.restaurants = restaurant));
+
+        this.userRestaurants = false;
+      }
+    });
+  }
+
   ionViewWillEnter() {
-    this.restaurantsService
+    if(!this.userRestaurants){
+      this.restaurantsService
       .getRestaurants()
       .subscribe((rests) => (this.restaurants = rests));
+    }
   }
 
   reloadRestaurants(refresher: IonRefresher) {
-    this.restaurantsService.getRestaurants().subscribe((rests) => {
-      this.restaurants = rests;
-      refresher.complete();
-    });
+    if(!this.userRestaurants){
+      this.restaurantsService.getRestaurants().subscribe((rests) => {
+        this.restaurants = rests;
+        refresher.complete();
+      });
+    }
   }
 
   async showOptions(rest: Restaurant) {
@@ -92,33 +123,6 @@ export class RestaurantsPageComponent {
 
     actSheet.present();
   }
-
-  // ngOnInit(): void {
-  //   this.route.queryParams.subscribe((params) => {
-  //     if (params['creator']) {
-  //       this.userService
-  //         .getUser(+params['creator'])
-  //         .subscribe((u) => (this.user = u));
-  //       this.restaurantsService.getRestaurants().subscribe(
-  //         (restaurant) =>
-  //           (this.restaurants = restaurant.filter((r) => {
-  //             if (r.mine) {
-  //               return r.creator?.id == params['creator'];
-  //             } else {
-  //               return r.creator == params['creator'];
-  //             }
-  //           }))
-  //       );
-  //       this.userRestaurants = true;
-  //     } else {
-  //       this.restaurantsService
-  //         .getRestaurants()
-  //         .subscribe((restaurant) => (this.restaurants = restaurant));
-
-  //       this.userRestaurants = false;
-  //     }
-  //   });
-  // }
 
   // saveRestaurant(restaurant: Restaurant): void {
   //   this.restaurants = [...this.restaurants, restaurant];
