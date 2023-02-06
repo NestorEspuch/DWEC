@@ -118,7 +118,7 @@ export class RestaurantFormComponent implements OnInit, CanDeactivateComponent {
 
       this.cuisineControl = this.fb.control('', [Validators.required]);
 
-      this.daysControl = this.fb.array(new Array(7).fill(true), [oneChecked()]);
+      this.daysControl = this.fb.array(, [oneChecked()]);
 
       this.phoneControl = this.fb.control('', [
         Validators.required,
