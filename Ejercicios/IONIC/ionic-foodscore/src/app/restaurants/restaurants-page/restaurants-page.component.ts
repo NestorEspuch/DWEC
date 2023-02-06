@@ -124,6 +124,14 @@ export class RestaurantsPageComponent {
     actSheet.present();
   }
 
+  setActive() {
+    if (this.active) {
+      this.active = false;
+    } else {
+      this.active = true;
+    }
+  }
+
   // saveRestaurant(restaurant: Restaurant): void {
   //   this.restaurants = [...this.restaurants, restaurant];
   // }
@@ -132,11 +140,4 @@ export class RestaurantsPageComponent {
   //   this.restaurants = this.restaurants.filter((r) => r !== restaurant);
   // }
 
-  // setActive() {
-  //   if (this.active) {
-  //     this.active = false;
-  //   } else {
-  //     this.active = true;
-  //   }
-  // }
 }
