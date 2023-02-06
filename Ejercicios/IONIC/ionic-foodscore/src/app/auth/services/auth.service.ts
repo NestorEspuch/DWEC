@@ -3,7 +3,7 @@ import { Observable, of, from, ReplaySubject, throwError } from 'rxjs';
 import { switchMap, catchError, map } from 'rxjs/operators';
 import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { Preferences } from '@capacitor/preferences';
-import { User } from '../interfaces/user.interface';
+import { GoogleLogin, User } from '../interfaces/user.interface';
 import { UserResponse } from '../interfaces/responses';
 
 @Injectable({
@@ -90,6 +90,26 @@ export class AuthService {
       }),
       catchError((e) => of(false))
     );
+  }
+
+  loginGoogle(userLogin: GoogleLogin):Observable<void> {
+
+    return this.http
+      .post<{ accessToken: string }>('auth/google', {
+        token: userLogin.authentication.idToken,
+        lat: userLogin.lng,
+        lng: userLogin.lat,
+      })
+      .pipe(
+        switchMap(async (r) => {
+          try {
+            await Preferences.set({ key: 'fs-token', value: r.accessToken });
+            this.setLogged(true);
+          } catch (e) {
+            throw new Error("Can't save authentication token in storage!");
+          }
+        })
+      );
   }
 
   private setLogged(logged: boolean) {

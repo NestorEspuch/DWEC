@@ -16,10 +16,18 @@ import { baseUrlInterceptor } from './app/interceptors/base-url.interceptor';
 
 import { APP_ROUTES } from './app/routes';
 import { provideArcgisToken } from './app/maps/arcgis-maps.config';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 
 if (environment.production) {
   enableProdMode();
 }
+
+GoogleAuth.initialize({
+  clientId:
+    '746820501392-nc4pet9ffnm8gq8hg005re9e6ho65nua.apps.googleusercontent.com',
+  scopes: ['profile', 'email'],
+  grantOfflineAccess: true,
+});
 
 bootstrapApplication(AppComponent, {
   providers: [

@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { RouterLink } from '@angular/router';
+import { GoogleAuth } from '@codetrix-studio/capacitor-google-auth';
 import {
   AlertController,
   IonicModule,
@@ -32,13 +33,11 @@ export class LoginComponent implements OnInit {
   ngOnInit() {
     // if (this.platform.is('capacitor')) {
     //   PushNotifications.register();
-
     //   // On success, we should be able to receive notifications
     //   PushNotifications.addListener('registration', (token: Token) => {
     //     this.firebaseToken = token.value;
     //     console.log(token);
     //   });
-
     //   PushNotifications.addListener('registrationError', (error) => {
     //     console.log(error);
     //   });
@@ -60,5 +59,26 @@ export class LoginComponent implements OnInit {
           ).present();
         },
       });
+  }
+
+  async loggedGoogle() {
+    try {
+      await GoogleAuth.signIn().then((user) => {
+        this.authService.loginGoogle(user).subscribe({
+          next: () => this.navCtrl.navigateRoot(['/restaurants']),
+          error: async (err) => {
+            (
+              await this.alertCtrl.create({
+                header: 'Login error',
+                message: err.error,
+                buttons: ['Ok'],
+              })
+            ).present();
+          },
+        });
+      });
+    } catch (err) {
+      console.error(err);
+    }
   }
 }

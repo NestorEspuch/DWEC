@@ -18,20 +18,32 @@
       <ion-row>
         <ion-col>
           <ion-button
+            expand="block"
             color="primary"
             style="width: 100%"
-            [routerLink]="['/users/edit', user.id]"
             *ngIf="user.me"
+            (click)="openModalPerfil()"
             >Edit profile</ion-button
           >
         </ion-col>
         <ion-col>
           <ion-button
+            expand="block"
             color="primary"
             style="width: 100%"
-            [routerLink]="['/users/edit', user.id]"
             *ngIf="user.me"
+            (click)="openModalPassword()"
             >Edit password</ion-button
+          >
+        </ion-col>
+        <ion-col>
+          <ion-button
+            expand="block"
+            color="medium"
+            style="width: 100%"
+            *ngIf="user.me"
+            (click)="openModalAvatar()"
+            >Edit avatar</ion-button
           >
         </ion-col>
       </ion-row>

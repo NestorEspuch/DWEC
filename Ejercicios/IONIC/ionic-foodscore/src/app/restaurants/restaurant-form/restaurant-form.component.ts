@@ -47,7 +47,6 @@ export class RestaurantFormComponent implements OnInit {
 
   constructor(
     private readonly restaurantService: RestaurantsService,
-    private readonly router: Router,
     private toastCtrl: ToastController,
     private nav: NavController
   ) {}

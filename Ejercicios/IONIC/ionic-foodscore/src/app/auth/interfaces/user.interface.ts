@@ -17,3 +17,10 @@ export interface UserLogin {
   token?: string;
   userId?: string;
 }
+
+export interface GoogleLogin {
+  email: string;
+  authentication:{accessToken:string,idToken:string}
+  lat?: number;
+  lng?: number;
+}

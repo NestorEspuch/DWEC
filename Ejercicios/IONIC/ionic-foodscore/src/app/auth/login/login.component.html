@@ -33,7 +33,7 @@
       </ion-row>
       <ion-row>
         <ion-col>
-          <ion-button color="danger" expand="block" [routerDirection]="'root'">
+          <ion-button (click)="loggedGoogle()" color="danger" expand="block" [routerDirection]="'root'">
             <ion-icon name="logo-google" slot="start"></ion-icon>
             Google
           </ion-button>
